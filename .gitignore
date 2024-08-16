@@ -1,0 +1,6 @@
+.env
+*.csv
+*.sqlite3
+
+chroma_db/
+env/
