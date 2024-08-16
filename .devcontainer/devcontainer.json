@@ -1,0 +1,40 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+    "name": "Python",
+    // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+    "image": "mcr.microsoft.com/devcontainers/python:3.12-bookworm",
+
+    // Features to add to the dev container. More info: https://containers.dev/features.
+    // "features": {},
+
+    // Configure tool-specific properties.
+    "customizations": {
+        // Configure properties specific to VS Code.
+        "vscode": {
+            // Set *default* container specific settings.json values on container create.
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/bin/python"
+            },
+
+            // Add the IDs of extensions you want installed when the container is created.
+            "extensions": [
+                "streetsidesoftware.code-spell-checker",
+                "qwtel.sqlite-viewer",
+                "GitHub.copilot",
+                "GitHub.copilot-chat",
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-python.isort",
+                "njpwerner.autodocstring",
+                "ms-python.pylint",          // Pylint extension
+                "ms-python.flake8",          // Flake8 extension
+                "ms-python.black-formatter", // Black formatter extension
+                "ms-python.autopep8"         // autopep8 extension
+            ]
+        }
+    },
+
+    // https://containers.dev/implementors/json_reference/#lifecycle-scripts
+    "postCreateCommand": "pip3 install -r requirements.txt || true"
+}
