@@ -16,7 +16,12 @@ To export your browser history, use the [Export Chrome History](https://chromewe
 
 #### Steps to Set Up Daytona Workspace
 
-1. **Create Daytona Workspace:**
+1. **Install Daytona**:
+    ```bash
+    (curl -L https://download.daytona.io/daytona/install.sh | sudo bash) && daytona server stop && daytona server -y && daytona
+    ```
+
+2. **Create Daytona Workspace:**
 
    Run the following command in your terminal to create a new Daytona workspace:
 
@@ -24,7 +29,7 @@ To export your browser history, use the [Export Chrome History](https://chromewe
    daytona create https://github.com/nkkko/history --code
    ```
 
-   There is no second step.
+   There is no third step.
 
 ## Usage
 
