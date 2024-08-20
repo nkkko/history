@@ -18,7 +18,7 @@ azure_endpoint = os.getenv("AZURE_ENDPOINT")
 azure_api_key = os.getenv("AZURE_OPENAI_API_KEY")
 
 # Default embedding function (all-MiniLM-L6-v2)
-default_ef = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
+default_ef = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="multi-qa-distilbert-cos-v1")
 
 # Azure embedding function
 azure_ef = embedding_functions.OpenAIEmbeddingFunction(

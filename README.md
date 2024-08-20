@@ -51,7 +51,7 @@ To export your browser history, use the [Export Chrome History](https://chromewe
    python search.py --embed path/to/your/history.csv
    ```
 
-   By default, this uses a local embedding model (all-MiniLM-L6-v2). To use Azure embeddings, add the `--azure` flag:
+   By default, this uses a local embedding model (multi-qa-distilbert-cos-v1 with Max Sequence Length: 512 and 768 dimensions). To use Azure embeddings, add the `--azure` flag:
 
    ```sh
    python search.py --embed path/to/your/history.csv --azure
