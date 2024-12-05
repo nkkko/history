@@ -20,14 +20,19 @@ azure_api_key = os.getenv("AZURE_OPENAI_API_KEY")
 # Default embedding function (all-MiniLM-L6-v2)
 default_ef = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="multi-qa-distilbert-cos-v1")
 
-# Azure embedding function
-azure_ef = embedding_functions.OpenAIEmbeddingFunction(
-    api_key=azure_api_key,
-    api_base=azure_endpoint,
-    api_type="azure",
-    api_version=azure_api_version,
-    model_name="text-embedding-3-small"  # Use the deployment name instead of model name
-)
+def get_azure_embedding_function():
+    if not all([azure_api_version, azure_endpoint, azure_api_key]):
+        raise ValueError(
+            "Azure OpenAI credentials not found. Please set AZURE_API_VERSION, "
+            "AZURE_ENDPOINT, and AZURE_OPENAI_API_KEY environment variables."
+        )
+    return embedding_functions.OpenAIEmbeddingFunction(
+        api_key=azure_api_key,
+        api_base=azure_endpoint,
+        api_type="azure",
+        api_version=azure_api_version,
+        model_name="text-embedding-3-small"
+    )
 
 def create_chroma_client():
     return chromadb.PersistentClient(path="./chroma_db")
@@ -104,7 +109,13 @@ def main():
     parser.add_argument("query", nargs="?", help="Search query")
     args = parser.parse_args()
 
-    embedding_function = azure_ef if args.azure else default_ef
+    try:
+        embedding_function = get_azure_embedding_function() if args.azure else default_ef
+    except ValueError as e:
+        if args.azure:
+            print(f"Error: {str(e)}")
+            return
+        embedding_function = default_ef
 
     client = create_chroma_client()
     collection = create_or_get_collection(client, embedding_function)
